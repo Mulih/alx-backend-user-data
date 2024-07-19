@@ -13,7 +13,7 @@ def home() -> str:
     Home endpoint
     """
 
-    return jsonify({"message": "Bien venue"})
+    return jsonify({"message": "Bienvenue"})
 
 
 if __name__ == "__main__":
