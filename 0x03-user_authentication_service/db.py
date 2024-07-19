@@ -49,7 +49,7 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """
-        find and update user
+        find user
         """
         if not kwargs:
             raise InvalidRequestError
@@ -62,3 +62,12 @@ class DB:
             raise InvalidRequestError
         except NoResultFound:
             raise NoResultFound
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        user = self.find_user_by(id=user_id)
+        for key, value in kwargs.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+            else:
+                raise ValueError
+        self._session.commit()
